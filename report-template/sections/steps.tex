@@ -1,0 +1,54 @@
+\subsection{实现Tiny+KNN方法}
+	\begin{enumerate}
+		\item 实现student.py/get_tiny_images(image_paths)函数: 
+		根据Tiny Images和KNN的实验原理，为输入的图像路径列表生成 Tiny Images 特征。
+		输出一个 n x d的 NumPy数组，
+		其中 n是图像数量，
+		d是 Tiny Images 特征向量的长度（例如 16*16=256）；
+
+		\item 完善 `nearest_neighbor_classify(train_image_feats, train_labels, test_image_feats)` 函数
+		使用 KNN 分类器对测试图像进行分类。
+		为输入的图像路径列表生成 Tiny Images 特征。
+		输出一个 n x d的 NumPy数组，
+		其中 n是图像数量，
+		d是 Tiny Images 特征向量的长度（例如 16*16=256）；
+		输出一个m x 1的 NumPy 数组，
+		其中m是测试图像数量，每个元素是对应的预测类别标签。
+
+	\end{enumerate}
+
+
+\subsection{实现 Bag of Words (SIFT) + SVM 方法}
+	\begin{enumerate}
+		\item 实现student.py/build_vocabulary(image_paths, vocab_size)函数
+		根据Bag of Words (SIFT) + SVM的实验原理，
+		从训练图像中提取 HOG 特征并构建视觉词汇，
+		输出一个vocab_size x (z*z*9)的 NumPy 数组，
+		代表聚类中心（即视觉词汇）。
+		通常会将这个词汇保存到文件vocab.npy。
+
+		\item 实现 get_bags_of_words(image_paths)函数，
+		为输入的图像路径列表生成 Bag of Words 直方图特征，
+		加载已构建的视觉词汇 (vocab.npy)，
+		输出一个n x vocab_size的 NumPy 数组，
+		其中n是图像数量，vocab_size是词汇大小，
+		每个元素是对应的 Bag of Words 直方图特征向量。
+
+		\item 完善 svm_classify(train_image_feats, train_labels, test_image_feats)函数；
+		使用 SVM 分类器对测试图像进行分类
+		输出一个m x 1的 NumPy 数组，
+		其中m是测试图像数量，
+		每个元素是对应的预测类别标签。
+	\end{enumerate}
+
+
+\subsection{实现 DNN 网络}
+在proj4.ipynb重新开一个单元格，用于实现DNN
+
+\subsection{比较分析}
+	\begin{enumerate}
+		\item 在完成以上实现后，运行proj4.ipynb所有单元格。
+		\item 计算 Tiny+KNN、BoW+SVM 和 DNN在测试集上的分类精度。
+		\item 比较这三种方法的精度,分析不同特征表示和不同分类器对场景分类性能的影响。
+	\end{enumerate}
+    

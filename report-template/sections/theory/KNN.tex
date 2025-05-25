@@ -1,0 +1,34 @@
+\section{K近邻分类器实验原理}
+
+K近邻(K-Nearest Neighbors, KNN)是一种简单直观的监督学习算法，
+主要用于分类和回归任务。
+在本实验中，它被用作分类器，特别是与Tiny Images特征结合使用。
+
+\subsection{基本原理}
+KNN的核心思想是：一个样本的类别由其在特征空间中的K个最近邻居的类别决定。
+
+\subsection{KNN特点}
+\begin{itemize}
+    \item \textbf{简单易懂}：原理直观，易于实现
+    \item \textbf{无需训练}：仅存储训练数据，无复杂训练过程
+    \item \textbf{计算开销}：预测阶段需计算与所有训练样本的距离，大数据集上耗时
+    \item \textbf{对噪声敏感}：K值较小时对噪声和离群点敏感
+    \item \textbf{维数灾难}：高维特征空间中距离计算意义减弱，数据稀疏
+    \item \textbf{非参数模型}：不对数据分布做假设
+\end{itemize}
+
+\subsection{算法步骤}
+算法流程如下伪代码所示
+\input{KNN_algorithm}
+
+\subsection{K值选择}
+参数K是KNN算法最重要的决定因素：
+\begin{itemize}
+    \item K=1时，新样本类别由最近训练样本决定，对噪声敏感
+    \item 增大K可减少噪声影响，使决策边界更平滑
+    \item K过大可能包含不相关邻居，导致性能下降
+    \item 通常通过交叉验证选择最优K值
+\end{itemize}
+
+
+

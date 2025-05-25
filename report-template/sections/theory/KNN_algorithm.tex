@@ -1,0 +1,70 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{algorithmicx}
+\usepackage{algpseudocode} % For pseudocode formatting
+\usepackage{enumitem} % For list formatting
+
+\title{K-Nearest Neighbors (KNN) Classification Pseudocode}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+the pseudocode for the K-Nearest Neighbors (KNN) classification algorithm.
+\end{abstract}
+
+\section{Algorithm: KNN\_Classify}
+
+\begin{algorithmic}[1]
+\Procedure{KNN\_Classify}{TestData, TrainingData, TrainingLabels, K}
+  \Comment{TestData: Feature vector of a single test sample $x_{test}$}
+  \Comment{TrainingData: Set of $n$ training sample feature vectors $\{x_1, x_2, ..., x_n\}$}
+  \Comment{TrainingLabels: Corresponding labels $\{y_1, y_2, ..., y_n\}$}
+  \Comment{K: Number of nearest neighbors (positive integer)}
+  \Comment{Output: Predicted class label $y_{pred}$ for $x_{test}$}
+
+  \State Initialize an empty list: $NeighborsList$
+  \Comment{Stores (Distance, Label) tuples}
+
+  \For{each training sample $x_i$ in TrainingData (from $i = 1$ to $n$)}
+    \State Calculate the distance between $x_{test}$ and $x_i$:
+    \State $Distance_i = \text{Distance}(x_{test}, x_i)$ \Comment{e.g., Euclidean Distance}
+    \State Get the corresponding label $y_i$ from TrainingLabels
+    \State Add tuple $(Distance_i, y_i)$ to $NeighborsList$
+  \EndFor
+
+  \State Sort $NeighborsList$ based on the distance in ascending order
+  \Comment{Sorts tuples by their first element}
+
+  \State Select the first K elements from the sorted $NeighborsList$
+  \State $K\_Nearest\_Neighbors = NeighborsList[1 \dots K]$ \Comment{These are the K closest neighbors}
+
+  \State Initialize an empty dictionary or map: $LabelCounts$
+  \Comment{To count the frequency of labels}
+
+  \For{each neighbor $(distance, label)$ in $K\_Nearest\_Neighbors$}
+    \State Increment count for $label$ in $LabelCounts$
+    \Comment{e.g., $LabelCounts[label] = LabelCounts.get(label, 0) + 1$}
+  \EndFor
+
+  \State Find the label with the maximum count in $LabelCounts$
+  \State $y_{pred} = \text{Label with highest count in } LabelCounts$
+  \Comment{Handle ties if necessary}
+
+  \State \Return $y_{pred}$
+
+\EndProcedure
+\end{algorithmic}
+
+\section{Distance Calculation (Example: Euclidean Distance)}
+
+The Euclidean distance between two feature vectors $\mathbf{x} = (x_1, x_2, \dots, x_D)$ and $\mathbf{y} = (y_1, y_2, \dots, y_D)$ in a D-dimensional space is given by:
+\[
+d(\mathbf{x}, \mathbf{y}) = \sqrt{\sum_{j=1}^{D} (x_j - y_j)^2}
+\]
+
+\end{document}

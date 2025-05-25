@@ -1,0 +1,72 @@
+%!Mode:: "TeX:UTF-8"
+% !TEX program  = xelatex
+\documentclass[a4paper,11pt,UTF8,AutoFakeBold]{ctexart}
+
+% 引入宏定义 macros.tex
+\input{macros}
+
+\begin{document}
+\xiaosihao \setCJKfamilyfont{song}{SimSun}  
+
+\course{计算机视觉与模式识别}
+\college{计算机科学与工程学院}
+\major{计算机科学与技术}
+\studentid{2022010910017}
+\author{谢卿云}
+\teacher{}
+\thedate{2025 年 5 月 10 日}
+
+\maketitle
+
+%\chapter{实验一}{}{}                                      % 用于单次实验报告开头的 “实验X”
+\chapter{实验四}{实验室}{2025 年 5 月 10 日}           % 实验信息
+
+\section{实验项目名称：}
+Scene Recognition with Bag of Words
+
+\section{实验原理：}
+\input{sections/theory/TinyImages}
+\input{sections/theory/KNN}
+\input{sections/theory/Bags}
+\input{sections/theory/SVM}
+\input{sections/theory/DNN}
+
+\section{实验目的：}
+\input{sections/target}
+
+\section{实验内容：}
+\input{sections/content}
+
+\section{实验器材（设备、元器件）：}
+\input{sections/material}
+
+\section{实验步骤：}
+\input{sections/steps}
+
+\section{实验数据及结果分析：}
+\input{sections/result}
+
+\section{实验结论：}
+\input{sections/conclusion}
+
+\section{总结及心得体会：}
+\input{sections/gain}
+
+\section{对本实验过程及方法、手段的改进建议及展望：}
+\input{sections/improvement}
+
+\vspace{4cm}
+\begin{flushright}
+\begin{tabular}{lc}
+\sihao{\hei{报告评分：}}& \sihao{\song{~~~~~~}}\\
+\sihao{\hei{指导教师签字：}}& \sihao{\song{~~~~~~}}\\
+\end{tabular}
+\end{flushright}
+
+\newpage
+
+\begin{appendix}
+\input{sections/appendix}
+\end{appendix}
+
+\end{document}

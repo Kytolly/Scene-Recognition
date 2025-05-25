@@ -1,0 +1,33 @@
+\subsection{Tiny Images 实验原理}
+
+Tiny Images 是一种简单而有效的图像特征表示方法，
+其核心思想是将高分辨率图像缩放到小尺寸，
+并将像素值展平作为特征向量。
+Tiny Images常常在场景识别任务中作为基准方法或与其他特征结合使用时，
+仍能取得一定的效果。
+在本实验中，将Tiny Images与KNN分类器结合，
+作为探索不同特征和分类器组合的第一步。
+
+\subsubsection{方法特点}
+Tiny Images方法具有以下特点：
+
+\begin{itemize}
+    \item \textbf{计算效率高}：特征提取过程简单快速
+    \item \textbf{低维表示}：特征向量维度较低（如256维）
+    \item \textbf{全局特征}：捕捉图像的整体低频信息
+    \item \textbf{对细节不敏感}：对噪声和细节变化具有鲁棒性
+    \item \textbf{对几何变换敏感}：对图像的平移、旋转和缩放敏感
+\end{itemize}
+
+\subsubsection{基本原理}
+Tiny Images 方法通过以下步骤将图像转换为特征向量：
+
+\begin{enumerate}
+    \item \textbf{图像缩放}：将原始图像强制缩放到固定的小尺寸（如16x16像素），保留整体结构信息。
+    
+    \item \textbf{灰度转换}：将彩色图像转换为灰度图像，简化特征表示。
+    
+    \item \textbf{特征向量生成}：将缩放后的图像像素值按序排列，形成一维特征向量。对于16x16的灰度图像，得到256维向量。
+    
+    \item \textbf{特征归一化}：对特征向量进行归一化处理，减少光照等因素的影响。
+\end{enumerate}
