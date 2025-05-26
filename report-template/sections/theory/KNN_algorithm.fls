@@ -1,0 +1,6 @@
+PWD e:/XQY/Scene-Recognition/report-template/sections/theory
+INPUT d:/texlive/2025/texmf.cnf
+INPUT d:/texlive/2025/texmf-dist/web2c/texmf.cnf
+INPUT d:/texlive/2025/texmf-var/web2c/pdftex/pdflatex.fmt
+INPUT e:/XQY/Scene-Recognition/report-template/sections/theory/KNN_algorithm.tex
+OUTPUT KNN_algorithm.log

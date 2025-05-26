@@ -102,7 +102,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 重定义枚举编号为 1),2)...
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\renewcommand{\labelenumi}{\theenumi）}
+\renewcommand{\labelenumi}{\theenumi.}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -278,9 +278,9 @@
     \vspace*{-20bp} % Adjust the vertical space her
     \centerline{\\[20bp]\yihao{\hei{\bfseries 实  ~~~ 验  ~~~ 报  ~~~ 告}}}
 
-    \ifthenelse{\isempty{#3}}{
-        \centerline{\\[20bp]\yihao{\song{\bfseries #1}}}
-    }{
+    % \ifthenelse{\isempty{#3}}{
+    %     \centerline{\\[20bp]\yihao{\song{\bfseries #1}}}
+    % }{
         \noindent
         \begin{tabularx}{\textwidth}{XXX}
             \Large\bfseries\song\zihao{4}学生姓名：{\@author} &
@@ -288,12 +288,12 @@
             \Large\bfseries\song\zihao{4}指导教师：{\report@teacher}
         \end{tabularx}\\
 
-        \noindent
-        \begin{tabularx}{\textwidth}{XX}
-            \Large\bfseries\song\zihao{4}实验地点：{#2} &
-            \Large\bfseries\song\zihao{4}实验时间：{#3}
-        \end{tabularx}
-    }
+    %     \noindent
+    %     \begin{tabularx}{\textwidth}{XX}
+    %         \Large\bfseries\song\zihao{4}实验地点：{#2} &
+    %         \Large\bfseries\song\zihao{4}实验时间：{#3}
+    %     \end{tabularx}
+    % }
 }
 \makeatother
 

@@ -1,0 +1,17 @@
+运行第一组（Tiny+KNN）的结果如图1所示，
+\begin{figure}[hbt!]
+    \centering
+    \includegraphics[width=0.8\textwidth]{imgs/1.png} % 确保图片文件路径正确
+    \caption{Tiny Image + KNN 混淆矩阵}
+    \label{图1：}
+\end{figure}
+可以看到整体准确率仅有0.189，接近随机猜测（理论上15类随机猜测准确率为1/15 ≈ 0.067）。
+
+运行第二组（Bags of Words + SVM）的结果如图2所示，
+\begin{figure}[hbt!]
+    \centering
+    \includegraphics[width=0.8\textwidth]{imgs/2.png} % 确保图片文件路径正确
+    \caption{Bag of Words + SVM 混淆矩阵}
+    \label{图2：}
+\end{figure}
+整体准确率上升至0.711，显著高于第一组。

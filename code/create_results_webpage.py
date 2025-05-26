@@ -4,7 +4,7 @@ import warnings
 import skimage
 import glob
 import os
-
+from PIL import Image
 from skimage import io
 
 # Skimage gives us some lossy conversion errors that we really don't care about
@@ -226,11 +226,11 @@ def create_results_webpage(train_image_paths, test_image_paths,
 					thisExample = train_examples[j][0]
 					tmp = skimage.io.imread(thisExample)
 					height, width = rescale(tmp.shape, thumbnail_height)
-					tmp = skimage.transform.resize(tmp, (height, width),
-						anti_aliasing=True, mode='wrap')
+					tmp = skimage.transform.resize(tmp, (height, width), anti_aliasing=True, mode='wrap')
 
-					name = os.path.basename(thisExample)
-					skimage.io.imsave('results_webpage/thumbnails/' + cat + '_' + name, tmp, quality=100)
+					name = os.path.basename(thisExample) 
+					tmp_pil_image = convert_and_prepare_for_jpeg(tmp) 
+					tmp_pil_image.save('results_webpage/thumbnails/' + cat + '_' + name, format='JPEG', quality=100) 
 					f.write('<td bgcolor=LightBlue>')
 					f.write('<img src="%s" width=%d height=%d>' % ('thumbnails/' + cat + '_' + name, width, height))
 					f.write('</td>\n')
@@ -247,7 +247,10 @@ def create_results_webpage(train_image_paths, test_image_paths,
 						anti_aliasing=True, mode='wrap')
 
 					name = os.path.basename(thisExample)
-					skimage.io.imsave('results_webpage/thumbnails/' + cat + '_' + name, tmp, quality=100)
+					# Use the helper function to convert and prepare the image
+					tmp_pil_image = convert_and_prepare_for_jpeg(tmp)
+					# Use PIL's save method to save the image as JPEG
+					tmp_pil_image.save('results_webpage/thumbnails/' + cat + '_' + name, format='JPEG', quality=100)
 					f.write('<td bgcolor=LightGreen>');
 					f.write('<img src="%s" width=%d height=%d>' % ('thumbnails/' + cat + '_' + name, width, height))
 					f.write('</td>\n');
@@ -264,7 +267,10 @@ def create_results_webpage(train_image_paths, test_image_paths,
 						anti_aliasing=True, mode='wrap')
 
 					name = os.path.basename(thisExample)
-					skimage.io.imsave('results_webpage/thumbnails/' + cat + '_' + name, tmp, quality=100)
+					# Use the helper function to convert and prepare the image
+					tmp_pil_image = convert_and_prepare_for_jpeg(tmp)
+					# Use PIL's save method to save the image as JPEG
+					tmp_pil_image.save('results_webpage/thumbnails/' + cat + '_' + name, format='JPEG', quality=100)
 					f.write('<td bgcolor=LightCoral>');
 					f.write('<img src="%s" width=%d height=%d>' % ('thumbnails/' + cat + '_' + name, width, height))
 					f.write('<br><small>%s</small>' % false_positive_labels[j][0]);
@@ -282,7 +288,10 @@ def create_results_webpage(train_image_paths, test_image_paths,
 						anti_aliasing=True, mode='wrap')
 
 					name = os.path.basename(thisExample)
-					skimage.io.imsave('results_webpage/thumbnails/' + cat + '_' + name, tmp, quality=100)
+					# Use the helper function to convert and prepare the image
+					tmp_pil_image = convert_and_prepare_for_jpeg(tmp)
+					# Use PIL's save method to save the image as JPEG
+					tmp_pil_image.save('results_webpage/thumbnails/' + cat + '_' + name, format='JPEG', quality=100)
 					f.write('<td bgcolor=#FFBB55>');
 					f.write('<img src="%s" width=%d height=%d>' % ('thumbnails/' + cat + '_' + name, width, height));
 					f.write('<br><small>%s</small>' % false_negative_labels[j][0]);
@@ -318,3 +327,29 @@ def rescale(dims, thumbnail_height):
 	left = int(round(dims[0] * factor))
 	right = int(round(dims[1] * factor))
 	return (left, right)
+
+# Add this helper function definition
+def convert_and_prepare_for_jpeg(img_array):
+	"""
+	Converts a floating-point image array (0-1 range) to uint8 and prepares
+	it as a PIL Image suitable for saving as JPEG.
+	Assumes the input img_array is a numpy array from skimage processing.
+	"""
+	# Convert floating-point image data (assuming range 0-1) to uint8 (0-255)
+	# Clip values to [0, 1] just in case resize introduced values outside this range
+	tmp_uint8 = np.clip(img_array * 255, 0, 255).astype(np.uint8)
+
+	# Determine mode and create PIL Image
+	# JPEG supports 'L' (grayscale) or 'RGB'. We need to ensure the data array matches.
+	if tmp_uint8.ndim == 2: # Grayscale image (2 dimensions)
+		return Image.fromarray(tmp_uint8, 'L')
+	elif tmp_uint8.ndim == 3 and tmp_uint8.shape[2] == 3: # RGB image (3 dimensions, 3 channels)
+			return Image.fromarray(tmp_uint8, 'RGB')
+	# Add handling for RGBA or other modes if necessary, though L and RGB are most common for JPEGs
+	elif tmp_uint8.ndim == 3 and tmp_uint8.shape[2] == 4: # RGBA image
+			print("Warning: RGBA image detected, converting to RGB for JPEG save.")
+			return Image.fromarray(tmp_uint8, 'RGBA').convert('RGB') # Convert RGBA to RGB
+	else:
+		# Handle other unexpected formats
+		print(f"Warning: Unexpected image format for saving thumbnail: {tmp_uint8.shape}. Attempting default PIL save.")
+		return Image.fromarray(tmp_uint8) # Let Pillow guess the mode, might still fail for weird formats

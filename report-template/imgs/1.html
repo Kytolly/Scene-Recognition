@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href=http://fonts.googleapis.com/css?family=Nunito:300|Crimson+Text|Droid+Sans+Mono rel=stylesheet type=text/css>
+<style type="text/css">
+body {
+  margin: 0px;
+  width: 100%;
+  font-family: Crimson Text, serif;
+  background: #fcfcfc;
+}
+table td {
+  text-align: center;
+  vertical-align: middle;
+}
+h1 {
+  font-family: Nunito, sans-serif;
+  font-weight: normal;
+  font-size: 28px;
+  margin: 25px 0px 0px 0px;
+  text-transform: lowercase;
+}
+.container {
+  margin: 0px auto 0px auto;
+  width: 1160px;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+
+<center>
+<h1>Scene classification results visualization</h1>
+<img src="confusion_matrix.png">
+
+<br>
+Accuracy (mean of diagonal of confusion matrix) is 0.189
+<p>
+
+<table border=0 cellpadding=4 cellspacing=1>
+<tr>
+<th>Category name</th>
+<th>Accuracy</th>
+<th colspan=2>Sample training images</th>
+<th colspan=2>Sample true positives</th>
+<th colspan=2>False positives with true label</th>
+<th colspan=2>False negatives with wrong predicted label</th>
+</tr>
+<tr>
+<td>Kitchen</td>
+<td>0.020</td>
